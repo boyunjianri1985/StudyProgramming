@@ -12,17 +12,22 @@ namespace behaviour
 //如果遇到一些需求的更改，这种直接的引用关系将面临不断的变化。
 //在这种情况下，我们可使用一个“中介对象”来管理对象间的关联关系，
 //避免相互交互的对象之间的紧耦合引用关系，从而更好地抵御变化。
-    abstract class AbstractChatroom
+
+// 房屋中介将 房东和租房者 集合起来，互通信息有他们自己完成 ：中介者模式
+//中介，1个房屋 1实体类1个虚方法，发送用的聊天房屋的方法，聊天房屋有调用中介的接受，接收用自己的虚方法 ， 从 房屋 中 注册者 1 给 2发消息（注册者都在中介）， 其实就是 2 接受消息 
+    //一个抽象类2个抽象方法
+
+    abstract class AbstractChatroom  //1个抽象类 2个抽象方法，注册参与群，发送消息
     {
         public abstract void Register(Participant participant);
-        public abstract void Send(string from, string to, string message);
+        public abstract void Send(string from, string to, string message); 
     }
 
     //ConcreteMediator
     /// <summary>
-    /// 内部有一个记录外壳类的Hashtable，把Chatroom登记录入一个外壳类中。 Send
-    /// </summary>
-    class Chatroom : AbstractChatroom
+    ///中介者 房屋聊天室 ， 有键值对集合把注册这都集合起来，发送接受消息还是用 聊天者的方法
+   /// </summary>
+    class Chatroom : AbstractChatroom // 
     {
         private Hashtable participants = new Hashtable();
         public override void Register(Participant participant)
@@ -33,7 +38,7 @@ namespace behaviour
             }
             participant.Chatroom = this;
         }
-        public override void Send(string from, string to, string message)
+        public override void Send(string from, string to, string message) //给租房者发消息，就是在中介注册了信息的住房者接受消息
         {
             Participant pto = (Participant)participants[to];
             if (pto != null)
@@ -45,11 +50,12 @@ namespace behaviour
 
     //AbstractColleague
     /// <summary> 
-    /// 类似适配器，外壳类  ， chatroom是干活的
+    ///  中介，1个房屋 1实体类1个虚方法，发送用的聊天房屋的方法，聊天房屋有调用中介的接受，接收用自己的虚方法 ， 从 房屋 中 注册者 1 给 2发消息（注册者都在中介）， 其实就是 2 接受消息 
     /// </summary>
+    /// 
     class Participant
     {
-        private Chatroom chatroom;
+        private Chatroom chatroom;  
         private string name;
 
         //Constructor
@@ -93,9 +99,6 @@ namespace behaviour
             base.Receive(from, message);
         }
     }
-
-
-
 
     //ConcreteColleague2
     class NonBeatle : Participant

@@ -19,7 +19,7 @@ namespace behaviour
 
 
     #region Visitor
-    interface IVisitor
+    interface IVisitor  //1个接口 ， 2个接口实现类，对抽象员工类的操作
     {
         void Visit(Element element);
     }
@@ -34,7 +34,7 @@ namespace behaviour
 
             // Provide 10% pay raise
             employee.Income *= 1.10;
-            Trace.WriteLine(string.Format("{0} {1}'s new income: {2:C}", employee.GetType().Name, employee.Name ,employee.Income));
+            Trace.WriteLine(string.Format("{0} {1}'s new income: {2:C}", employee.GetType().Name, employee.Name, employee.Income));
         }
     }
 
@@ -47,7 +47,7 @@ namespace behaviour
             Employee employee = element as Employee;
 
             // Provide 3 extra vacation days
-            Trace.WriteLine(string.Format("{0} {1}'s new vacation days: {2}",employee.GetType().Name, employee.Name,employee.VacationDays));
+            Trace.WriteLine(string.Format("{0} {1}'s new vacation days: {2}", employee.GetType().Name, employee.Name, employee.VacationDays));
         }
     }
 
@@ -63,7 +63,7 @@ namespace behaviour
 
     // "ConcreteElement"
 
-    class Employee : Element
+    class Employee : Element   //抽象实现类
     {
         string name;
         double income;
@@ -103,7 +103,7 @@ namespace behaviour
         }
     }
 
-
+    #region 3员工
     class Clerk : Employee
     {
         // Constructor
@@ -130,6 +130,10 @@ namespace behaviour
         {
         }
     }
+
+
+    #endregion
+
 
     // "Element"
 

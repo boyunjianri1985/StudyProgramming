@@ -10,10 +10,10 @@ namespace behaviour
 
 
 
-
-   public abstract class DocumentCommand
-    {
-        public Document _document;
+    //Command模式它封装的是命令，把命令发出者的责任和命令执行者的责任分开
+   public abstract class DocumentCommand  // 1个抽象类内含一个实例类并有初始方法（适配器），1个执行抽象方法
+    {                                   //子类实现抽象方法，调用适配器的中发各种方法，实现子类的各个功能（）
+        public Document _document; //适配
 
         public DocumentCommand(Document doc)
         {
@@ -30,7 +30,7 @@ namespace behaviour
         public abstract void Execute();
 
     }
-    public class DisplayCommand : DocumentCommand
+    public class DisplayCommand : DocumentCommand  
     {
         public DisplayCommand(Document doc)
 
@@ -76,7 +76,10 @@ namespace behaviour
         }
     }
 
-    public class DocumentInvoker
+    /// <summary>
+    /// 命令执行者，只是执行菜单的命令，菜单用 抽象类 
+    /// </summary>
+    public class DocumentInvoker  //实体类中包含3个抽象类，使用3个子类实现各自功能 
     {
         DocumentCommand _discmd;
 
@@ -111,6 +114,9 @@ namespace behaviour
         }
     }
 
+    /// <summary>
+    /// 命令发出者 ， 
+    /// </summary>
     public class Document
     {
         /**/

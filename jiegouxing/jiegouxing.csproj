@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Adapter.cs" />
     <Compile Include="Bridge.cs" />
+    <Compile Include="Bridge_Pattern.cs" />
+    <Compile Include="brush.cs" />
     <Compile Include="Decorator_Pattern.cs" />
     <Compile Include="Facade.cs" />
     <Compile Include="Flyweight_Pattern.cs" />
@@ -71,6 +73,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Group.cs" />
+    <Compile Include="objectAdepter.cs" />
+    <Compile Include="PowerAdapter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy_Pattern.cs" />

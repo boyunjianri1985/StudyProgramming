@@ -20,7 +20,7 @@ namespace behaviour
 
   abstract class State
   {
-      protected Account account;     //Account包含State，是为了使用状态， State包含Account 是为了记录当前的青蛙，好修改你状态account.State = new SilverState(this);
+    protected Account account;     //Account包含State，是为了使用状态， State包含Account 是为了记录当前的青蛙，好修改你状态account.State = new SilverState(this);
     protected double balance;
 
     protected double interest;
@@ -216,7 +216,7 @@ namespace behaviour
 
     class Account      /// 这就是哪只青蛙
     {
-        private State state;   //可以有不同的状态777  ，  State 中包含  Account   Account中包含 State
+        private State state;   //可以有不同的状态777  ，  State 中包含并可修改 Account 。  Account中包含并可修改 State ，State根据钱数量的多少new 不同的 抽象子类 State,,Account行为也是调用State行为而变化
         private string owner;
 
         // Constructor

@@ -81,7 +81,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(158, 23);
             this.button6.TabIndex = 2;
-            this.button6.Text = "2.抽象模式(Abstract Factory)";
+            this.button6.Text = "2.抽象工厂模式(Abstract Factory)";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

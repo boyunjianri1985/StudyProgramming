@@ -11,7 +11,8 @@ namespace behaviour
 //在软件构建过程中，一个请求可能被多个对象处理，但是每个请求在运行时只能有一个接受者，如果显示指定，将必不可少地带来请求发送者与接受者的紧耦合。
 //如何使请求的发送者不需要指定具体的接受者？让请求的接受者自己在运行时决定来处理请求，从而使两者解耦。
 
-    public abstract class Approver
+    //就像列表一样首尾相连把一个抽象类设置为自己的私有类，这样，从列表的第一个开始对请求处理，符合条件的就用那个类处理，可以设置为 1个请求多人处理也可以1个请求1人处理
+    public abstract class Approver //1个抽象类（包含自己的类），1个抽象方法
     {
         protected Approver successor;  //包含自己的抽象类，可以  建出很多 层楼
         public void SetSuccessor(Approver successor)
@@ -76,7 +77,7 @@ namespace behaviour
 
 
 
-    //Request details
+    //Request details 需求者需求内容
    public class Purchase
     {
         private int number;

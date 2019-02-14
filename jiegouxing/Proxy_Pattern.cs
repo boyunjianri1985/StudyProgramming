@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,12 +17,12 @@ namespace jiegouxing
 //7．同步化（Synchronization）代理：使几个用户能够同时使用一个对象而没有冲突。
 //8．智能引用（Smart Reference）代理：当一个对象被引用时，提供一些额外的操作，比如将对此对象调用的次数记录下来等。
 
-    // my :  MathProxy 作为  Math 在网络上的代理 类 ， 实现网络上的传输 ，
-    //我们在MathProxy中对实现Math数据类的访问，让MathProxy来代替网络上的Math类，
-    //这样我们看到MathProxy就好像是本地Math类，它与客户程序处在了同一地址空间内：
+    //不直接访问math类，在客户和math类之间增加一层代理类。可以用懒加载的方式，拖延要使用时再调用
+
 
     public interface IMath
     {
+        int CreateTimeStamp { get; }
         double Add(double x, double y);
 
         double Sub(double x, double y);
@@ -33,6 +34,13 @@ namespace jiegouxing
 
     public class Math
     {
+        public int CreateTimeStamp { get; private set; }
+        public Math()
+        {
+            CreateTimeStamp = Environment.TickCount;
+        }
+
+
         public double Add(double x, double y)
         {
             return x + y;
@@ -56,28 +64,61 @@ namespace jiegouxing
 
     public class MathProxy : IMath
     {
-        private Math math = new Math();
+
+        private readonly static Lazy<MathProxy> _instanceMath = new Lazy<MathProxy>(() => new MathProxy());
+        public static MathProxy Instance
+        {
+            get { return _instanceMath.Value; }
+            //get { return InstanceEx; }
+        }
+
+        private static MathProxy Instance2 = null;
+        private static object objlock = new object();
+
+        public static MathProxy InstanceEx
+        {
+            get
+            {
+                if (Instance2 == null)
+                {
+                    lock (objlock)
+                    {
+                        if (Instance2 == null)
+                        {
+                            Instance2 = new MathProxy();
+                        }
+                    }
+                }
+                return Instance2;
+            }
+        }
+
+
+        public int CreateTimeStamp
+        {
+            get { return Environment.TickCount; }
+        }
 
         // 以下的方法中，可能不仅仅是简单的调用Math类的方法
 
         public double Add(double x, double y)
         {
-            return math.Add(x, y);
+            return Instance.Add(x, y);
         }
 
         public double Sub(double x, double y)
         {
-            return math.Sub(x, y);
+            return Instance.Sub(x, y);
         }
 
         public double Mul(double x, double y)
         {
-            return math.Mul(x, y);
+            return Instance.Mul(x, y);
         }
 
         public double Dev(double x, double y)
         {
-            return math.Dev(x, y);
+            return Instance.Dev(x, y);
         }
     }
 

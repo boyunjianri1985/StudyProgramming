@@ -18,11 +18,21 @@ namespace behaviour
 //2．除了可以灵活应对子步骤的变化外，“不用调用我，让我来调用你（Don't call me ,let me call you)”的反向控制结构是Template Method的典型应用。“Don’t call me.Let me call you”是指一个父类调用一个子类的操作，而不是相反。
 //3．在具体实现方面，被Template Method调用的虚方法可以具有实现，也可以没有任何实现（抽象方法，纯虚方法），但一般推荐将它们设置为protected方法。
   // MY :数据库之中使用 模板 ，  用 虚方法， 抽象类都可以
-    public abstract class DataAccessObject
+
+
+    //1个抽象类 中抽象方法让子类实现，而虚方法和字段，共有作为模板让子类调用即可
+
+    public abstract class DataAccessObject //2个抽象方法 ，2个虚方法，2个字段 ， 1 个共有方法
     {
         protected string connectionString;
 
         protected DataSet dataSet;
+
+
+
+        protected abstract void Select();
+
+        protected abstract void Display();
 
         protected virtual void Connect()
         {
@@ -31,12 +41,6 @@ namespace behaviour
                 "Server=.;User Id=sa;Password=;Database=Northwind";
 
         }
-
-        protected abstract void Select();
-
-        protected abstract void Display();
-
-
         protected virtual void Disconnect()
         {
             connectionString = "";

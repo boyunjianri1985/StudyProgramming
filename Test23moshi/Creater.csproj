@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="abstruct.cs" />
     <Compile Include="Adapter.cs" />
     <Compile Include="Creater.cs" />
     <Compile Include="Factory_Method.cs" />

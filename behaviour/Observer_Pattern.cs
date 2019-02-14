@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace behaviour
 {
-    public interface IObserverAccount
+    
+   // 观 察者定义了对象间一对多的关系，当一个对象的状态变化时，所有依赖它的对象都得到通知并且自动地更新。在ATM取款，当取款成功后，以手机、邮件等方式进行通知。
+    public interface IObserverAccount  
     {
         void Update(BankAccount ba);
     }
@@ -47,7 +49,7 @@ namespace behaviour
 
 
     public class Emailer : IObserverAccount
-    {
+    { 
         private string _emailer;
         public Emailer(string emailer)
         {
@@ -71,7 +73,7 @@ namespace behaviour
         {
             this._phoneNumber = phoneNumber;
         }
-        public void Update(BankAccount ba)
+        public void Update(BankAccount ba) // 一个小类可以放入一个大类，可以修改（也可以使用）其属性、字段
         {
             Trace.WriteLine(string.Format("Notified :Phone number is {0} You withdraw  {1:C} ", _phoneNumber, ba.Money));
         }
@@ -79,7 +81,7 @@ namespace behaviour
 
 
 
-    public class BankAccount
+    public class BankAccount //将观察者添加到列表中
     {
         private List<IObserverAccount> Observers = new List<IObserverAccount>();
 
@@ -97,7 +99,6 @@ namespace behaviour
             foreach (IObserverAccount ob in Observers)
             {
                 ob.Update(this);
-
             }
         }
         public void AddObserver(IObserverAccount observer)

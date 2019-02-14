@@ -88,7 +88,14 @@ namespace Test23moshi
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            // Abstractfactory1
+            AbstractFactory factory1 = new ConcreteFactory1();
+            Client c1 = new Client(factory1);
+            c1.Run();
+            // Abstractfactory2
+            AbstractFactory factory2 = new ConcreteFactory2();
+            Client c2 = new Client(factory2);
+            c2.Run();
         }
 
 

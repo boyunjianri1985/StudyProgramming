@@ -7,6 +7,31 @@ using System.Threading.Tasks;
 
 namespace behaviour
 {
+    #region 枚举器
+
+    public class ConList : IEnumerable
+    {
+         int[] list;
+        public ConList()
+        {
+            list = new int[] { 1, 2, 3, 4, 5 };
+        }
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < list.Length; i++)
+            {
+                 yield return list[i];
+            }
+           
+        }
+    }
+
+
+    #endregion
+
+
+
+
 
 
     public class ConcreteList : IList

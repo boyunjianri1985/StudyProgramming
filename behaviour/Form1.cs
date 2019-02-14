@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -55,26 +56,36 @@ namespace behaviour
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //就是实现 IEnumerable 接口，可以使用 foreach 循环遍历
+            IEnumerable iter = new ConList();
 
-            IIterator iterator = null;
 
-            IList list = new ConcreteList();
-
-            iterator = list.GetIterator();
-
-            while (iterator.MoveNext())
+            foreach (var VARIABLE in iter)
             {
-                int i = (int)iterator.CurrentItem();
-                Trace.WriteLine(i.ToString());
-
-                iterator.Next();
+                Trace.WriteLine(VARIABLE.ToString());
             }
+
+            //IIterator iterator = null;
+
+            //IList list = new ConcreteList();
+
+            //iterator = list.GetIterator();
+
+            //while (iterator.MoveNext())
+            //{
+            //    int i = (int)iterator.CurrentItem();
+            //    Trace.WriteLine(i.ToString());
+
+            //    iterator.Next();
+            //}
 
 
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //当银行的钱数发生变化时，手机短信，邮件，等多种通知方式通知
+            // 一个银行类中有 一个联系方式通知的IObserverAccount抽象的 列表， 如果钱数有变化，遍历这个列表的抽象类，每一个都发送消息
             BankAccount ba = new BankAccount();
             IObserverAccount emailer = new Emailer("abcdwxc@163.com");
             IObserverAccount mobile = new Mobile(13901234567);
@@ -89,7 +100,9 @@ namespace behaviour
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            string englist = "This is an apple.";
+            string chinese = Translator.Translate(englist);
+            Trace.WriteLine(chinese);
 
         }
 
@@ -99,7 +112,8 @@ namespace behaviour
         private void button6_Click(object sender, EventArgs e)
         {
 
-
+            // 把所有的信息都放在 中介者的房屋中，有在房屋中 对某个人发送信息
+            //中介者 房屋聊天室 ， 有键值对集合把注册这都集合起来，发送接受消息还是用 聊天者的方法
             Chatroom chatroom = new Chatroom();
             //Create participants and register them
             Participant George = new Beatle("George");
@@ -124,7 +138,7 @@ namespace behaviour
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            //就像列表一样首尾相连把一个抽象类设置为自己的私有类，这样，从列表的第一个开始对请求处理，符合条件的就用那个类处理，可以设置为 1个请求多人处理也可以1个请求1人处理
 
             //Setup Chain of Responsibility
             Director Larry = new Director();
@@ -152,7 +166,7 @@ namespace behaviour
         private void button9_Click(object sender, EventArgs e)
         {
 
-
+            //就是用一个类保存自己的成员到另一个保存类中，还可以从保存类中恢复自己的成员
             SalesProspect s = new SalesProspect();
             s.Name = "xiaoming";
             s.Phone = "(010)65236523";
@@ -178,6 +192,7 @@ namespace behaviour
         {
             SingleThread_Singleton.Instance.sayHello();
             MultiThread_Singleton.Instance.sayHello();
+            MultiThread_Singleton.Instance.sayHello();
 
         }
 
@@ -202,7 +217,7 @@ namespace behaviour
         {
 
             //Two contexts following different strategies 
-            SortdList studentRecords = new SortdList(); // 内部包含一个抽象类，多个算法实现这个抽象类，实际使用时再调用不同类去处理
+            SortdList studentRecords = new SortdList(); // 内部包含一个排序抽象类，多个排序算法类实现这个抽象类 ， 运算类 有一个抽象算法类， 抽象算法类列表， 实际使用时先设置用那个抽象类，再用这个抽象类的方法去排序
 
             studentRecords.Add("Satu");
             studentRecords.Add("Jim");

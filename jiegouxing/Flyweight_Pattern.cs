@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 
 namespace jiegouxing
 {
-    public abstract class Charactor
+
+
+     //享元模式：有一些资源例如拨号音发生器、振铃发生器和拨号接收器是必须由所有用户共享的。当一个用户拿起听筒打电话时，他不需要知道使用了多少资源。对于用户而言所有的事情就是有拨号音，拨打号码，拨通电话。 
+    public abstract class Charactor //一个抽象类2个抽象方法，6个 protected 字段
     {
         //Fields//my：工厂里存一个键值对集合，保存了3个类，要哪个，直接取出来用
-        protected char _symbol;
+        protected char _symbol;//抽象方法中的非抽象字段，子类可继承自己使用，也可以用Base._symbol使用
 
         protected int _width;
 
@@ -28,8 +31,8 @@ namespace jiegouxing
         public abstract void Display();
     }
 
-    // "CharactorA"
-    public class CharactorA : Charactor
+    // "CharactorA" 3 个实现抽象类
+    public class CharactorA : Charactor 
     {
         // Constructor 
         public CharactorA()
@@ -107,7 +110,7 @@ namespace jiegouxing
     }
 
     // "CharactorFactory"
-    public class CharactorFactory
+    public class CharactorFactory // 1包含抽象键值对的工厂，有添加方法，有设置方法
     {
         // Fields
         private Hashtable charactors = new Hashtable(); //my：工厂里存一个键值对集合，保存了3个类，要哪个，直接取出来用

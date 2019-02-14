@@ -13,7 +13,10 @@ namespace jiegouxing
        // 客户程序可以向处理简单元素一样来处理复杂元素,从而使得客户程序与复杂元素的内部结构解耦。
     //my： Picture 相当于一个 容器，  具体做事的 是子类 ，具体用哪个子类划线，可以对容器操作 ， 外部只调用 Picture 操作即可
 
-    public abstract class Graphics
+    //故事：工具箱里有很多工具，使用时组合使用 
+
+
+    public abstract class Graphics //一个抽象类 含一个抽象方法，1个字段1个设置字段方法
     {
         protected string _name;
 
@@ -24,14 +27,14 @@ namespace jiegouxing
         public abstract void Draw();
     }
 
-    public class Picture : Graphics
+    public class Picture : Graphics   //子类实现抽象类后，内部有链表可放多个抽象父类，画图用列表中实例类画图 
     {
         protected ArrayList picList = new ArrayList();
 
         public Picture(string name)
             : base(name)
         { }
-        public override void Draw()
+        public override void Draw()  
         {
             Trace.WriteLine("Draw a" + _name.ToString());
 
